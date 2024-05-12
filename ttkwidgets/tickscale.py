@@ -458,6 +458,15 @@ class TickScale(ttk.Frame):
             # backward compatibility
             self._var.trace_vdelete('w', self._trace)
             self._trace = self._var.trace('w', self._increment)
+        except tk.TclError:
+            #   File "...\venv\Lib\site-packages\ttkwidgets\tickscale.py", line 455, in _init
+            #     self._var.trace_remove('write', self._trace)
+            #   File "...\Python312\Lib\tkinter\__init__.py", line 477, in trace_remove
+            #     self._tk.deletecommand(cbname)
+            # _tkinter.TclError: can't delete Tcl command
+            # just do the trace_add instead
+            self._trace = self._var.trace_add('write', self._increment)
+
         self._update_slider_length()
 
     def _init_vertical(self):
