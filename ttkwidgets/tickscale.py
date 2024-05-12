@@ -98,8 +98,8 @@ class TickScale(ttk.Frame):
                 self._tickinterval = round(self._tickinterval, self._digits)
                 if self._resolution > self._tickinterval:
                     self._tickinterval = self._resolution
-                self.scale.configure(from_=round(self.scale.get('from'), self._digits),
-                                     to=round(self.scale.get('to'), self._digits))
+                self.scale.configure(from_=round(self.scale.cget('from'), self._digits),
+                                     to=round(self.scale.cget('to'), self._digits))
 
         if not isinstance(self._digits, int):
             raise TypeError("'digits' must be an integer.")
